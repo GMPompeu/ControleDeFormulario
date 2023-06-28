@@ -1,0 +1,240 @@
+:root {
+    --grey_shadow: rgb(184, 184, 184);
+    --red_spt: rgb(216, 1, 1);
+    --grey_hover: rgb(214, 214, 214);
+    --grey_input: rgb(235, 235, 235);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(255, 255, 255);
+}
+
+.content-impacto {
+    display: none;
+}
+
+.container {
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 50px;
+    border-radius: 5px;
+}
+
+.content {
+    text-align: left;
+}
+
+/*----------------------------------------------- CONTEUDO FORMULÁRIO --------------------------------------------*/
+legend {
+    background-color: var(--red_spt);
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 30px;
+    color: white;
+    text-align: center;
+}
+
+.inputBox2 div {
+    margin-bottom: 30px;
+}
+
+.selecao {
+    margin-bottom: 30px;
+    width: 90%;
+}
+
+.inputUser {
+    background-color: var(--grey_input);
+    padding: 5px;
+    font-size: 14px;
+    border-style: solid;
+    border-color: var(--grey_hover);
+    border-radius: 5px;
+}
+
+.obrigatorio,
+select {
+    background-color: var(--grey_input);
+    padding: 5px;
+    font-size: 14px;
+    border-style: solid;
+    border-color: var(--grey_hover);
+    border-radius: 5px;
+}
+.add{
+    font-style: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 7px;
+    border: none;
+    background-color: var(--red_spt);
+    margin-left: 45%;
+}
+.nxt {
+    font-style: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 7px;
+    border: none;
+    background-color: rgb(207, 207, 207);
+    margin-left: 90%;
+}
+.add:hover{
+    background-color: rgb(165, 0, 0);
+    scale: 1.05;
+    color: white;
+    border-color: rgb(182, 1, 1);
+}
+.nxt:hover {
+    background-color: rgb(216, 1, 1);
+    scale: 1.05;
+    color: white;
+    border-color: rgb(182, 1, 1);
+}
+#hr,
+#data {
+    width: 20%;
+}
+
+#prontuario {
+    width: 30%;
+}
+
+#op_posto,
+label {
+    margin-left: 5px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#open {
+    padding: 10px;
+}
+#perso{
+    width: 18%;
+}
+#apurado{
+    width: 10%;
+}
+#apurado1{
+    width: 16%;
+}
+#values{
+    width: 15%;
+}
+#tx{
+    width: 15%;
+}
+#ativo{
+    width: 30%;
+}
+#sistema{
+    width: 15%;
+}
+a{
+    text-decoration: none;
+}
+/*----------------------------------------------- Modal popup --------------------------------------------*/
+
+.modal-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(0, 0, 0, .6);
+    top: 0px;
+    left: 0px;
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container.openModal {
+    display: flex;
+}
+
+
+
+.modal {
+    background-color: white;
+    max-width: 60%;
+    min-width: 300px;
+    padding: 40px;
+    max-height: 60%;
+    border-radius: 5px;
+    overflow-y: auto;
+
+}
+
+@keyframes modal {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -60px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.btnOpenModal .modal {
+    animation: modal .3s;
+}
+
+
+textarea {
+    max-width: 100%;
+    border: solid 1px var(--grey_hover);
+    border-radius: 5px;
+    padding: 4px;
+    background-color: rgb(236, 236, 236);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    border-top: none;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+
+}
+
+.satisfy {
+    border: 1px solid var(--grey_hover);
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(236, 236, 236);
+    height: 10px;
+    width: 30%;
+}
+
+.label-satisfy {
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-size: 14px;
+    color: rgb(77, 77, 77);
+    margin-left: 2px;
+}
+
+.coment {
+    font-size: 18px;
+    color: rgb(77, 77, 77);
+}
+h2{
+    margin-bottom: 40px;
+}
+

@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(247, 247, 247);
+}
+
+.telaPrincipal {
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    margin-top: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    width: 30%;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px var(--grey_shadow);;
+}
+
+.title_login{
+    font-size: 20px;
+    color: white;
+    background-color: rgb(216, 1, 1);
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.login {
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    /* border-style: solid;
+    border-color: rgb(202, 202, 202); */
+    border: none;
+    box-shadow: 1px 1px 4px rgb(80, 80, 80);
+    width: 100%;
+}
+
+.button {
+    font-size: 20px;
+    width: 100%;
+    font-style: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 7px;
+    border: none;
+    background-color: rgb(207, 207, 207);
+}
+
+.button:hover {
+    background-color: rgb(216, 1, 1);
+    scale: 1.05;
+    color: white;
+    border-color: rgb(182, 1, 1);
+}
+
+input:hover {
+    background-color: rgb(204, 204, 204);
+    border-color: rgb(100, 100, 100);
+}
+
+.content-login
+{
+    padding: 30px;
+}
+.alertlogin{
+    margin-bottom: 20px;
+    margin-top: 30px;
+    background-color: rgba(255, 200, 200, 0.767);
+    padding: 10px;
+    color: brown;
+    max-width: 100%;
+}
