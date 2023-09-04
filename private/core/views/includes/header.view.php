@@ -13,8 +13,10 @@
     <link rel="stylesheet" href="<?=ROOT?>/assets/style/RegistrarFormStyle.css">
     <link rel="stylesheet" href="<?=ROOT?>/assets/style/CadastroStyle.css">
     <link rel="stylesheet" href="<?=ROOT?>/assets/style/RfcStyle.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/style/DashBoard.css">
     <script src="<?=ROOT?>/assets/style/scripts/formulario.js"></script>
     <script src="<?=ROOT?>/assets/style/scripts/contents.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />

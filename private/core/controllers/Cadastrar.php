@@ -6,15 +6,14 @@ class Cadastrar extends Controller
 
         $error = array();
         $usuario = new Usuario();
-        $data = $_SESSION['USUARIO']->USUARIO_LOGIN;
-        if(!Auth::loggetin()){
-            $this->redirect('login');
+        if (!Auth::loggetin()) {
+            $this->redirect('logout');
         }
-        if($row = $usuario->where('USUARIO_LOGIN', $data)){
-            $row = $row[0];
-            if($row->NIVEL_ACESSO == 1){
-                $this->redirect('homeform');
-            }
+        if (Auth::idfativo() != "S") {
+            $this->redirect('logout');
+        }
+        if (Auth::acess() != 4 && Auth::acess() != 3 && Auth::acess() != 2 ) {
+            $this->redirect('home');
         }
 
         if (count($_POST) > 0) {

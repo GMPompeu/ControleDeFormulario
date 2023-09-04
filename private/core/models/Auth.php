@@ -26,4 +26,27 @@ class Auth extends Controller{
         }
         return false;
     }
+    public static function acess()
+    {
+        $usuario = new Usuario();
+        $acesso = $_SESSION['USUARIO']->USUARIO_LOGIN;
+        $row = $usuario->where('USUARIO_LOGIN', $acesso);
+
+        if (!empty($row)) {
+            return $row[0]->NIVEL_ACESSO;
+        }
+
+        return null;
+    }
+    public static function idfativo()
+    {
+        $usuario = new Usuario();
+        $idf = $_SESSION['USUARIO']->USUARIO_LOGIN;
+        $row = $usuario->where('USUARIO_LOGIN', $idf);
+
+        if (!empty($row)){
+            return $row[0]->IDF_ATIVO;
+        }
+        return null;
+    }
 }

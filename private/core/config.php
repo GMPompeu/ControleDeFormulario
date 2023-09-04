@@ -1,5 +1,5 @@
 <?php
-    define('ROOT','http://localhost/DGQ-SYSTEM/public/');
+    define('ROOT','http://localhost/rfc-formulario/public/');
     
     define('DBNAME','agq');
     define('DBHOST','localhost');

@@ -3,8 +3,12 @@ class Login extends Controller
 {
     function index()
     {
-        // ACESSO GERAL = 3 || ACESSO FISCALIZAÇÃO = 1
+        //ACESSO GERAL SPTRANS = 4 - ACESSO GERAL ATHENS = 3 - ACESSO GESTOR FISCALIZAÇÃO = 2 ACESSO FISCALIZAÇÃO = 1
         $error = array();
+        $success = array();
+        if(isset($_GET['success']) && $_GET['success'] == 1){
+            $success['chapa'] = "•Senha alterada com sucesso!";
+        }
         if (count($_POST) > 0) {
             $usuario = new Usuario();
             if ($row = $usuario->where('USUARIO_LOGIN', $_POST['chapa'])) {
@@ -19,6 +23,6 @@ class Login extends Controller
             $error['chapa'] = "•Prontuário ou Senha incorretos";
         }
 
-        $this->view('login', ['error' => $error]);
+        $this->view('login', ['error' => $error, 'success'=> $success]);
     }
-};
+}

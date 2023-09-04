@@ -19,7 +19,7 @@
             <div class="dropdown2">
                 <button class="menu_user"><i class="bi bi-person-fill"></i>&nbsp;<?= Auth::user() ?>&nbsp;<b><i class="fa fa-angle-down"></i></b></button>
                 <div class="dropdown-content2">
-                    <a href="#">Alterar Senha</a>
+                    <a href="alterarsenha">Alterar Senha</a>
                     <a href="<?= ROOT ?>/logout">Sair</a>
                 </div>
             </div>
@@ -323,7 +323,7 @@
                             <option value="Monitor">Monitor</option>
                             <option value="Mouse">Mouse</option>
                             <option value="Teclado">Teclado</option>
-                        </select>
+                        </select><br><br>
                         <label for="chamado"><b>Numero Chamado:</b></label>
                         <input type="text" name="chamado" id="chamado" class="obrigatorio" size="10">
                         <div><br><br>

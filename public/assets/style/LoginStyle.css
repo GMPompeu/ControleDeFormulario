@@ -79,3 +79,9 @@ input:hover {
     color: brown;
     max-width: 100%;
 }
+.success{
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgba(0, 128, 0, 0.548);
+    color: rgb(1, 90, 1);
+}

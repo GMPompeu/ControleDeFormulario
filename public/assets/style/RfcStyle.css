@@ -42,9 +42,7 @@
 .field_sideB, fieldset
 {max-width: 50vw ;}
 .field_sideB, .text-DGQ, .desc_fisc
-{ width: 24vw; padding: 5px; border-radius: 10px; border-top-right-radius: 0; border-top-left-radius: 0; border: solid 2px; border-top: none; border: none; font-family: Arial, Helvetica, sans-serif;font-size: 14px; resize: none;}
-.field_sideB, .text-DGQ:hover, .desc_fisc:hover
-{background-color: var(--grey_input);}
+{ width: 24vw; padding: 5px;  border:none; font-family: Arial, Helvetica, sans-serif;font-size: 14px; color: rgb(51, 51, 51); resize: none;}
 .field_sideB, span
 {color:rgb(48, 48, 48) ;font-style: italic; }
 .desc_spt
@@ -270,16 +268,15 @@
 }
 .pop-indf{
     background-color: white;
-    max-width: 60%;
+    width: 40%;
     min-width: 300px;
     padding: 40px;
-    max-height: 60%;
+    max-height: 100%;
     border-radius: 5px;
-    overflow-y: auto;
 }
 .pop-naoconf{
     background-color: white;
-    max-width: 100%;
+    width: 40%;
     min-width: 300px;
     padding: 40px;
     max-height: 100%;
@@ -415,3 +412,13 @@
     
 }
 .restpopCancelar:hover{background-color:rgb(92, 92, 92) ; scale: 1.02;}
+
+.check_itens{
+   width: 100%; 
+}
+.item1{
+    margin-left: 10%;
+}
+.item2{
+    margin-left: 10%;
+}

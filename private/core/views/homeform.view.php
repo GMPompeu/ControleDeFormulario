@@ -19,7 +19,7 @@
             <div class="dropdown2">
                 <button class="menu_user"><i class="bi bi-person-fill"></i>&nbsp;<?= Auth::user() ?>&nbsp;<b><i class="fa fa-angle-down"></i></b></button>
                 <div class="dropdown-content2">
-                    <a href="#">Alterar Senha</a>
+                    <a href="alterarsenha">Alterar Senha</a>
                     <a href="<?= ROOT ?>/logout">Sair</a>
                 </div>
             </div>
@@ -32,9 +32,11 @@
                 <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z" />
             </svg>
         </button>
-        <a href="#" class="go_form"><i class="fas fa-chart-line"></i> DashBoard</a>
+        <a class="go_form" href="dashboard"><i class="fas fa-chart-line"></i> DashBoard</a>
         <a href="formulario" class="go_form">+Criar Formulário</a>
-        <a href="home" class="go_form"><i class="bi bi-house-door-fill"></i> Início</a>
+        <?php if (Auth::acess()== 3 || Auth::acess()== 4 || Auth::acess()== 2  ){ 
+        echo "<a href='home' class='go_form'><i class='bi bi-house-door-fill'></i> Início</a>";
+         } ?>
     </div>
 </div>
 <div tabindex="0" onclick="close_menu()" class="content1" id="content">
@@ -42,6 +44,12 @@
         <i class="bi bi-clipboard2-check"></i>
         <br><br>
         <h2>Relatório Fiscalização</h2>
+        <?php
+        if (count($error) == 0 && isset($_GET['search']) && !empty($_GET['search'])) {
+            echo "<a href= 'homeform'>Voltar para a página de pesquisa</a>";
+        }
+        ?>
+
         <div class="search">
             <br>
             <input type="text" name="pesquisa" class="pesquisa" id="pesquisa" placeholder="Pesquisar...">
@@ -63,30 +71,33 @@
                     <tr>
                         <th style="width:50px" class="identificador">Chave</th>
                         <th style="width:250px" class="uni">Unidade</th>
-                        <th style="width: 70px;" class="sts">Status</th>
+                        <th style="width: 80px;" class="sts">Status</th>
                         <th style="width:70px" class="data_visita">Data da Visita</th>
                         <th style="width:50px"><i class="bi bi-eye-fill"></i></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if ($result == true) {
-                        foreach ($result as $data) : ?>
-                            <tr>
-                                <td class='colum_one'>RFC -<?= $data->RFC ?></td>
-                                <td class='uni'><a class='link_view' href='rfc?id=<?= $data->RFC ?>'><?= $data->UNIDADE ?></a></td>
-                                <td class='sts'><?= $data->NOM_STATUS ?></td>
-                                <td class='data_visita'><?= $data->DTA_VISITA = implode("/", array_reverse(explode('-', $data->DTA_VISITA))) ?></td>
-                                <td>
-                                    <a class='btn-onefunction' id='gerarPdf' href='<?= ROOT?>/rfc?id=<?= $data->RFC ?>'>
-                                        <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-printer-fill' viewBox='0 0 16 16'>
-                                            <path d='M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z' />
-                                            <path d='M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z' />
-                                        </svg>
-                                    </a>
-                                </td>
-                            </tr>
-                    <?php endforeach;
-                    } ?>
+                    <?php
+                    if ($result == true) {
+                        foreach ($result as $data) {
+                            // Código HTML para exibir os resultados
+                            echo "<tr>";
+                            echo "<td class='colum_one'>RFC -" . $data->RFC . "</td>";
+                            echo "<td class='uni'><a class='link_view' href='rfc?id=" . $data->RFC . "'>" . $data->UNIDADE . "</a></td>";
+                            echo "<td class='sts'>" . $data->NOM_STATUS . "</td>";
+                            echo "<td class='data_visita'>" . implode("/", array_reverse(explode('-', $data->DTA_VISITA))) . "</td>";
+                            echo "<td>";
+                            echo "<a class='btn-onefunction' id='gerarPdf' href='" . ROOT . "/rfc?id=" . $data->RFC . "'>";
+                            echo "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-printer-fill' viewBox='0 0 16 16'>";
+                            echo "<path d='M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z' />";
+                            echo "<path d='M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z' />";
+                            echo "</svg>";
+                            echo "</a>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    }
+                    ?>
                 </tbody>
             </table>
             <?php if ($result == null) {
@@ -94,12 +105,55 @@
                 <div class="error404">
                     <strong><i class="bi bi-exclamation-diamond-fill"></i></strong>
                     <b>Pesquisa não encontrada</b>
-                    <a href="<?= ROOT ?>/homeform">Voltar para a pesquisa</a><img src="<?= ROOT ?>/assets/style/img/404.jpg" style=" height: 16vw;"><br>
+                    <img src="<?= ROOT ?>/assets/style/img/404.jpg" style=" height: 16vw;"><br>
                     <i>Por favor certifique se os dados foram enviados corretamente</i>
                 </div>
             <?php  } ?>
         </div>
     </div>
+    <?php
+    echo '<div class="pagination fixed-pagination">';
+    $primeiraPagina = 1;
+    if ($result > 0) {
+        if ($totalPaginas > 1) {
+            // Botão "Página Anterior"
+            if ($paginaAtual > 1) {
+                echo '<a href="?page=' . ($paginaAtual - 1);
+                if (!empty($_GET['search'])) {
+                    echo '&search=' . urlencode($_GET['search']);
+                }
+                echo '"><i class="bi bi-chevron-left"></i></a>';
+            }
+
+            // Exibir os links das páginas
+            $paginaInicial = max($paginaAtual - 1, 1);
+            $paginaFinal = min($paginaInicial + 2, $totalPaginas);
+
+            for ($i = $paginaInicial; $i <= $paginaFinal; $i++) {
+                if ($i == $paginaAtual) {
+                    echo '<span class="current">' . $i . '</span>';
+                } else {
+                    echo '<a href="?page=' . $i;
+                    if (!empty($_GET['search'])) {
+                        echo '&search=' . urlencode($_GET['search']);
+                    }
+                    echo '">' . $i . '</a>';
+                }
+            }
+
+            // Botão "Próxima Página"
+            if ($paginaAtual < $totalPaginas) {
+                echo '<a href="?page=' . ($paginaAtual + 1);
+                if (!empty($_GET['search'])) {
+                    echo '&search=' . urlencode($_GET['search']);
+                }
+                echo '"><i class="bi bi-chevron-right"></i></a>';
+            }
+        }
+        echo '</div>';
+    }
+    ?>
+
 </div>
 <script>
     var header = document.getElementById('header');

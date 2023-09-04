@@ -7,8 +7,8 @@ class Database
     {
         $string = DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME;
         if (!$conn = new PDO($string, DBUSER, DBPASSWORD)) {
-            die("Não foi possivel conectar ao banco de dados :,(");
-        }
+            die("Não foi possivel conectar ao banco de dados");
+        }   
         return $conn;
     }
 

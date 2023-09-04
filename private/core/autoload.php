@@ -3,6 +3,7 @@
 require "config.php";
 require "database.php";
 require "model.php";
+require "modelDash.php";
 require "controller.php";
 require "app.php";
 require "functions.php";

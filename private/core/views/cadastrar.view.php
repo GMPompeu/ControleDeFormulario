@@ -29,8 +29,9 @@
         <select name="nivel_acesso" class="cadastrar1" required>
             <option value="" disabled selected>Nivel de acesso</option>
             <option value="1">Acesso Fiscalizações</option>
-            <option value="2">Acesso Reclamações</option>
-            <option value="3">Acesso Geral</option>
+            <option value="2">Acesso Gestor Fiscalização</option>
+            <option value="3">Acesso Geral -[ATHENS]</option>
+            <option value="4">Acesso Geral -[SPTrans]</option>
         </select>
         <br><br>
         <button class="send_cad">cadastrar</button>

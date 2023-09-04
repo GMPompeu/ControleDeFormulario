@@ -32,6 +32,7 @@ class Usuario extends Model
     public function prontuario_id($data){
         if(isset($_SESSION['USUARIO']->USUARIO_LOGIN)){
             $data['chapa'] = $_SESSION['USUARIO']->USUARIO_LOGIN;
+
         }
     }
     

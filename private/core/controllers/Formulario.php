@@ -1,22 +1,35 @@
 <?php
 class Formulario extends Controller
 {
+
+     //ACESSO GERAL SPTRANS = 4 - ACESSO GERAL ATHENS = 3 - ACESSO GESTOR FISCALIZAÇÃO = 2 ACESSO FISCALIZAÇÃO = 1
     function index()
     {
         if (!Auth::loggetin()) {
-            $this->redirect('login');
+            $this->redirect('logout');
+        }
+        if (Auth::idfativo() != "S") {
+            $this->redirect('logout');
+        }
+        if (Auth::acess() != 4 && Auth::acess() != 3 && Auth::acess() != 2 && Auth::acess() != 1) {
+            $this->redirect('home');
         }
 
         $error = array();
+
+        
         $registrar = new Registrar();
         if ($registrar->validade($_POST)) {
+            $fiscal = $registrar->getFiscal();
+            $fiscalII = $registrar->getFiscalII();
+            $fiscalIII = $registrar->getFiscalIII();
             // ------------------------------TABELA EQUIP_TRABALHO_RFC----------------------------------------------------------
             $arrequip['PRONT_ONE'] = $_POST['firstPront'];
-            $arrequip['NOM_ONE'] = 'GUILHERME';
+            $arrequip['NOM_ONE'] = $fiscal ;
             $arrequip['PRONT_TWO'] = $_POST['secondPront'];
-            $arrequip['NOM_TWO'] = 'GUILHERME';
+            $arrequip['NOM_TWO'] = $fiscalII;
             $arrequip['PRONT_THREE'] = $_POST['thirdPront'];
-            $arrequip['NOM_THREE'] = 'GUILHERME';
+            $arrequip['NOM_THREE'] = $fiscalIII;
             $id_equipe = $registrar->insertEquipTr($arrequip);
 
             // -------------------------------TABELA OPERACAO_RFC----------------------------------------------------------------
@@ -30,10 +43,10 @@ class Formulario extends Controller
             $arrop['TRI_TOTAL'] = $_POST['agem'];
             $arrop['TRI_ATIVO'] = $_POST['thirddAtv'];
             $arrop['TRI_INATIVO'] = $_POST['thirdItv'];
-           $arrop['EQUIPAMENTOS'] = $_POST['infra'];  
-           $arrop['NUM_CHAMADO'] = $_POST['chamado'];
-           $arrop['TEMPO'] =$_POST['tempo'];
-                
+            $arrop['EQUIPAMENTOS'] = isset($_POST['infra']) ? ($_POST['infra']) : null;
+            $arrop['NUM_CHAMADO'] = isset($_POST['chamado']) ? ($_POST['chamado']) : null;
+            $arrop['TEMPO'] = isset($_POST['tempo']) ? ($_POST['tempo']) : null;
+
             $id_op = $registrar->insertOp($arrop);
 
 
@@ -122,7 +135,7 @@ class Formulario extends Controller
 
                 $id_cof = $registrar->insertCofre($data1);
             }
-            
+
             // --------------------------------------GUICHES_BUS_SPT----------------------------------------------------------------
             $bu_prata_apurado = $_POST['bu_prata_apurado'];
             $bu_estudante_apurado = $_POST['bu_estudante_apurado'];
@@ -133,7 +146,7 @@ class Formulario extends Controller
 
             $count2 = count($bu_prata_apurado);
 
-            for ($i = 0; $i < $count2; $i ++){
+            for ($i = 0; $i < $count2; $i++) {
                 $data3 = array();
                 $data3['BU_PRATA'] = isset($bu_prata_apurado[$i]) ? $bu_prata_apurado[$i] : null;
                 $data3['BU_ESTD'] = isset($bu_estudante_apurado[$i]) ? $bu_estudante_apurado[$i] : null;
@@ -145,6 +158,7 @@ class Formulario extends Controller
 
                 $id_bu = $registrar->insertGuicheBus($data3);
             }
+            // -----------------------------------GUICHE_DINHEIRO--------------------------------------------------------
 
             $din_prata_apurado = $_POST['din_prata_apurado'];
             $din_estudante_apurado = $_POST['din_estudante_apurado'];
@@ -161,7 +175,7 @@ class Formulario extends Controller
 
             $cont3 = count($din_prata_apurado);
 
-            for($i = 0; $i < $cont3; $i++){
+            for ($i = 0; $i < $cont3; $i++) {
                 $data4['GUI_PRATA'] = isset($din_prata_apurado[$i]) ? $din_prata_apurado[$i] : null;
                 $data4['GUI_ESTD'] = isset($din_estudante_apurado[$i]) ? $din_estudante_apurado[$i] : null;
                 $data4['PRATA_PER'] = isset($din_prata_personalizado[$i]) ? $din_prata_personalizado[$i] : null;
@@ -177,11 +191,38 @@ class Formulario extends Controller
                 $data4['ID_RFC'] = $id_rfc;
 
                 $id_din = $registrar->insertGuicheDin($data4);
-
             }
+            // ----------------------------------------------DIFERENCA---------------------------------------------------
 
-            $this->redirect('rfc?id='.$id_rfc);
+            // CALCULAR DIFERENCA DO PRATA
 
+            $DIF_PRATA = floatval(array_sum($din_prata_apurado))  + floatval(array_sum($din_prata_personalizado)) + 
+                floatval(array_sum($bu_prata_apurado)) + floatval(array_sum($bu_prata_personalizado)) +
+                floatval(array_sum($cof_prata_personalizado)) + floatval(array_sum($pasta_prata_apurado)) + 
+                floatval(array_sum($pasta_prata_personalizado));
+            
+                $DIF_PRATA4K = $DIF_PRATA - floatval($_POST['prata_personalizado']);
+
+            $DIF_ESTUDANTE = floatval(array_sum($din_estudante_apurado)) + floatval(array_sum($din_estudante_personalizado)) +
+                floatval(array_sum($bu_estudante_apurado)) + floatval(array_sum($bu_estudante_personalizado)) +
+                floatval(array_sum($cof_estudante_personalizado)) + floatval(array_sum($pasta_estudante_apurado)) + 
+                floatval(array_sum($pasta_estudante_personalizado));
+               
+                 $DIF_ESTD = $DIF_ESTUDANTE - floatval($_POST['estudante_personalizado']);
+
+            $DIF_DEVOL = floatval($_POST['cof_prata_devolvido']) - floatval($_POST['prata_sa']);
+
+            $DIFERENCA = ((floatval($data4['TX_COMUM']) * 30.80) + floatval($data4['TX_ESTUDANTE']) * 30.80) + floatval($data4['VL_COMUM']) +
+                floatval($data4['VL_ESCOLAR']) + floatval($data4['VL_FIDELIDADE']) - floatval($data4['CONTADO']);
+
+            $arrdif['DIF_PRATA'] = $DIF_PRATA4K;
+            $arrdif['DIF_ESTD'] = $DIF_ESTD;
+            $arrdif['DIFERENCA'] = $DIFERENCA;
+            $arrdif['ID_RFC'] = $id_rfc;
+
+            $registrar->insertDif($arrdif);
+
+            $this->redirect('rfc?id=' . $id_rfc);
         } else {
             $error = $registrar->error;
         }

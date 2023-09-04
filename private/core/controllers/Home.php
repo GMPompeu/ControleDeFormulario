@@ -3,24 +3,21 @@ class Home extends Controller
 {
     function index()
     {
-        // ACESSO GERAL = 3 || ACESSO FISCALIZAÇÃO = 1
-
+        //ACESSO GERAL SPTRANS = 4 - ACESSO GERAL ATHENS = 3 - ACESSO GESTOR FISCALIZAÇÃO = 2 ACESSO FISCALIZAÇÃO = 1
         $error = array();
         $usuario = new Usuario();
-        $data = $_SESSION['USUARIO']->USUARIO_LOGIN;
-        if(!Auth::loggetin()){
-            $this->redirect('login');
+
+        if (!Auth::loggetin()) {
+            $this->redirect('logout');
         }
-        if($row = $usuario->where('USUARIO_LOGIN', $data)){
-        $row = $row[0];
-        if ($row->IDF_ATIVO != 'S' ) {
-            $this->redirect('login');
-        }
-        if($row->NIVEL_ACESSO == 1){
+         if (Auth::idfativo() != "S") {
+             $this->redirect('logout');
+         }
+         if (Auth::acess() != 4 && Auth::acess() != 3 && Auth::acess() != 2 ){
             $this->redirect('homeform');
         }
-        }
-        $data = $usuario->findAll();
-        $this->view('home',['rows'=>$data, 'error' => $error]);
+        
+        $this->view('home', ['error' => $error]);
     }
-};
+}
+

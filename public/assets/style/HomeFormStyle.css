@@ -237,6 +237,38 @@ a {
 .menu_user:hover{
     background-color: rgb(233, 233, 233);
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .pagination a,
+  .pagination span {
+    display: inline-block;
+    padding: 4px 8px;
+    margin-right: 5px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+  }
+  
+  .pagination a:hover {
+    background-color: #ddd;
+  }
+  
+  .pagination span.current {
+    background-color: #494949;
+    color: #fff;
+    border-color: #494949;
+  }
+  .notfound {
+    margin-left: 10%;
+    margin-top: 5%;
+    height: 100vh;
+  }
 
 
 
